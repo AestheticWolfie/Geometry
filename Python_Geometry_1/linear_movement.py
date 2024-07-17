@@ -31,6 +31,14 @@ def linear_update(ball_object: CartesianBall,
         ball_object.x_collision = True
 
     if 0 >= ball_object.y or ball_object.y >= window.y_geometry and not ball_object.y_collision:
+
+        x_border = (window.y_geometry - ball_object.y_prev)\
+                   *(ball_object.x - ball_object.x_prev)/(ball_object.y - ball_object.y_prev)
+        x_border += ball_object.x_prev
+
+        ball_object.x = x_border
+        ball_object.y = 1
+
         ball_object.y_velocity *= -1
         ball_object.y_collision = True
 
@@ -45,8 +53,8 @@ def linear_update(ball_object: CartesianBall,
 
 last_update_time = time.time()
 
-ball.x_velocity = 1301
-ball.y_velocity = 488
+ball.x_velocity = 100
+ball.y_velocity = -200
 
 while True:
     time.sleep(1/120)
